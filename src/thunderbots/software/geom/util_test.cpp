@@ -11,14 +11,8 @@
 #include "software/geom/angle.h"
 #include "software/geom/point.h"
 
-// Set this to 1 to enable debug output.
-#define DEBUG 0
 
-#if DEBUG
-#define dbgout std::cout
-#else
 std::ostringstream dbgout;
-#endif
 
 TEST(GeomUtilTest, dist_point_rectangle_point_within)
 {
