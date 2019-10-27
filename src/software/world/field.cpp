@@ -104,6 +104,21 @@ Rectangle Field::fieldLines() const
     return Rectangle(friendlyCornerNeg(), enemyCornerPos());
 }
 
+//issue 979
+Rectangle Field::friendlyHalf() const
+{
+    return Rectangle(
+            friendlyCornerNeg(),
+            Point(0,  field_y_length_ * 0.5 ));
+}
+
+Rectangle Field::enemyHalf() const
+{
+    return Rectangle(
+            enemyCornerNeg(),
+            Point(0, field_y_length_ * 0.5));
+}
+
 double Field::centerCircleRadius() const
 {
     return center_circle_radius_;
@@ -250,3 +265,4 @@ bool Field::operator!=(const Field &other) const
 {
     return !(*this == other);
 }
+
