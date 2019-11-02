@@ -13,6 +13,7 @@
 #include "software/ai/hl/stp/tactic/receiver_tactic.h"
 #include "software/ai/hl/stp/tactic/shoot_goal_tactic.h"
 #include "software/util/logger/custom_logging_levels.h"
+#include "software/world/field.h"
 
 using namespace Passing;
 
@@ -78,6 +79,7 @@ void IndirectFreeKickPlay::getNextTactics(TacticCoroutine::push_type &yield)
     Rectangle cherry_pick_2_target_region(world.field().centerPoint(),
                                           world.field().enemyCornerNeg());
 
+
     // Otherwise, the pass is coming from the enemy end, put the two cherry-pickers
     // on the opposite side of the x-axis to wherever the pass is coming from
     if (world.ball().position().x() > -1)
@@ -103,8 +105,7 @@ void IndirectFreeKickPlay::getNextTactics(TacticCoroutine::push_type &yield)
 
     PassGenerator pass_generator(world, world.ball().position(),
                                  PassType::RECEIVE_AND_DRIBBLE);
-    pass_generator.setTargetRegion(
-        Rectangle(Point(0, world.field().yLength() / 2), world.field().enemyCornerNeg()));
+    pass_generator.setTargetRegion(world.field().getEnemyHalf());
 
     // Wait for a robot to be assigned to aligned to the ball to pass
     while (!align_to_ball_tactic->getAssignedRobot())
