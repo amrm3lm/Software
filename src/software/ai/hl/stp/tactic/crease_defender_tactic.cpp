@@ -60,7 +60,8 @@ double CreaseDefenderTactic::calculateRobotCost(const Robot &robot, const World 
 std::optional<std::pair<Point, Angle>> CreaseDefenderTactic::calculateDesiredState(
     const Robot &robot)
 {
-    if (friendly_team.goalie())
+
+    if (friendly_team.goalie() && field.friendlyDefenseArea().contains(friendly_team.goalie()->position()) )
     {
         // Get the point on the crease path exactly between the two defenders
         std::optional<Point> defender_reference_position =
