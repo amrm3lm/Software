@@ -31,6 +31,8 @@ const std::map<RobotId, std::optional<Path>> VelocityObstaclePathManager::getMan
                               current_objective.obstacles.end());
         path_planning_obstacles.insert(path_planning_obstacles.end(),
                                        path_obstacles.begin(), path_obstacles.end());
+
+        //path is null in some cases
         auto path = path_planner->findPath(current_objective.start, current_objective.end,
                                            navigable_area, path_obstacles);
 

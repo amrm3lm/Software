@@ -180,6 +180,10 @@ std::optional<Path> ThetaStarPathPlanner::findPath(
         return std::nullopt;
     }
 
+    //suggestion: these checks should be done by looking at x distance and y distance seperately
+    //since it is possible to map 2 points to the same coordinate but have their length be greater than
+    //SIZE_OF_GRID_CELL_IN_METERS
+
     // if the start and end points are close enough, then return a straightline path
     if ((start - end).length() < CLOSE_TO_END_THRESHOLD ||
         ((start - end).length() < SIZE_OF_GRID_CELL_IN_METERS))
@@ -200,6 +204,7 @@ std::optional<Path> ThetaStarPathPlanner::findPath(
 
     if (found_end == false)
     {
+        std::cout<<"start_coord, end_coord: ("<< start_coord.first<<" , "<<start_coord.second<<" , ) ( "<<end_coord.first<<" , "<<end_coord.second<<std::endl;
         return std::nullopt;
     }
 

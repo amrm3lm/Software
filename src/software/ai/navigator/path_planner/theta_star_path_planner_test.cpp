@@ -304,3 +304,21 @@ TEST_F(TestThetaStarPathPlanner, no_navigable_area)
 
     EXPECT_EQ(std::nullopt, path);
 }
+
+TEST_F(TestThetaStarPathPlanner, test_theta_star_nav_warning)
+{
+    //will return null when given 2 points that map to the same coordinate but are greater than 0.09m apart.
+    Field field = Field::createSSLDivisionBField();
+    Point start{-4.528, -3.119}, dest{-4.44, -3.031};
+
+    std::vector<ObstaclePtr> obstacles = std::vector<ObstaclePtr>();
+
+    Rectangle navigable_area = field.fieldBoundary();
+
+    auto path = planner->findPath(start, dest, navigable_area, obstacles);
+
+    EXPECT_TRUE(path != std::nullopt);
+
+    EXPECT_EQ(start, path->getStartPoint());
+    EXPECT_EQ(dest, path->getEndPoint());
+}
